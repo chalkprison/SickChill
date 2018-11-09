@@ -30,7 +30,7 @@ from sickchill.helper.exceptions import ex
 
 class Notifier(object):
 
-    SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/'
+    SLACK_WEBHOOK_URL = ''
 
     def notify_snatch(self, ep_name):
         if sickbeard.SLACK_NOTIFY_SNATCH:
