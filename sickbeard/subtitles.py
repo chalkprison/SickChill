@@ -54,6 +54,8 @@ if 'wizdom' not in provider_manager.names():
 # Until it gets an update in subliminal, we'll use a fixed provider.
 if 'subscenter' not in provider_manager.names():
     provider_manager.register('subscenter = sickchill.providers.subtitle.subscenter:SubsCenterProvider')
+if 'subtitulamos' not in provider_manager.names():
+    provider_manager.register('subtitulamos = sickchill.providers.subtitle.subtitulamos:SubtitulamosProvider')
 
 subliminal.region.configure('dogpile.cache.memory')
 
@@ -65,6 +67,7 @@ PROVIDER_URLS = {
     'opensubtitles': 'http://www.opensubtitles.org',
     'podnapisi': 'http://www.podnapisi.net',
     'subscenter': 'http://www.subscenter.info',
+    'subtitulamos': 'https://www.subtitulamos.tv',
     'thesubdb': 'http://www.thesubdb.com',
     'wizdom': 'http://wizdom.xyz',
     'tvsubtitles': 'http://www.tvsubtitles.net'
@@ -265,7 +268,7 @@ def download_subtitles(episode, force_lang=None):  # pylint: disable=too-many-lo
                                                        min_score=user_score, only_one=not sickbeard.SUBTITLES_MULTI)
 
         subliminal.save_subtitles(video, found_subtitles, directory=subtitles_path,
-                                  single=not sickbeard.SUBTITLES_MULTI)
+                                  single=not sickbeard.SUBTITLES_MULTI, encoding='utf8')
     except IOError as error:
         if 'No space left on device' in ex(error):
             logger.log('Not enough space on the drive to save subtitles', logger.WARNING)
